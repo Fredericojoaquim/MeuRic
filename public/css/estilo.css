@@ -1,0 +1,50 @@
+.logo{
+    width: 80px;
+    height: 00px;
+}
+
+.font-button{
+    color: aliceblue!important;
+}
+.font-button:hover{
+    background-color: black!important;
+}
+
+.without-margin{
+    margin-top: -30px !important;
+    padding-top: -30px!important;
+}
+
+.my-margibutton{
+    padding: 10px!important;
+}
+
+.my-margitop{
+    padding: 30px!important;
+}
+
+.my-size-text{
+    font-size: 27px!important;
+}
+
+.my-border{
+    border-color: black;
+    border-bottom: 20px;
+    border-top: 1px;
+    border-right: 0;
+    border-left: 0;
+}
+
+.margin-table{
+
+    padding: 20px;
+}
+
+.cor.logo{
+    background-color: blue!important;
+}
+.my-table-color{background-color: rgba(0, 0, 0, 0.03)!important}
+.card-header{background-color:#078ff7!important;}
+
+.my-font{color: black;}
+
