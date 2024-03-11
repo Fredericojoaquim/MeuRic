@@ -176,6 +176,97 @@ class TrabalhoRepository implements Itrabalho
             'categoria_id'=>$help->clear($request->categoria),
             'colecao_id'=>$help->clear($request->colecao),
             'caminho'=>$caminho,
+            'estado'=>'pendente'
+        ];
+        $t=Trabalho::findOrFail(addslashes($request->trabalho_id));
+        $t->update($s);
+
+          //metadados
+          $s=[
+            'titulo'=>$help->clear($request->titulo),
+            'orientador_id'=>$help->clear($request->orientador),
+            'lingua'=>$help->clear($request->lingua),
+            'data_criacao'=>date('y-m-d'),
+            'local'=>$help->clear($request->local),
+            'palavra_chave'=>$help->clear($request->palavra),
+            'formato'=>$extensao,
+            'resumo'=>$help->clear($request->resumo),
+            'fontes'=>$help->clear($request->fontes),
+            'tamanho'=>$size,
+            'trabalho_id'=>addslashes($request->trabalho_id),
+            ];
+            $m=Metadado::findOrFail(addslashes($request->metadado_id));
+            $m->update($s);
+    
+
+        //alterar autores*/
+        $autores=$help->separarStringPorVirgula($request->autor);
+        $autores_id=$help->buscarAutoresPorNome($autores);
+       // dd($autores_id);
+        if(count($autores_id)==0)
+        {
+            //novos autores
+            $autores=$help->separarStringPorVirgula($request->autor);
+            foreach($autores as $a)
+            {
+                $autor=new Autor();
+                $autor->nome=$a;
+                $autor->save();
+
+                //salvando os dados na tabela trabalho-autor
+                $tautor=new TrabalhoAutor();
+                $tautor->autor_id= $autor->id;
+                $tautor->trabalho_id=$t->id;
+                $tautor->save();
+            }
+            return true;
+        }else{
+
+            if(!$help->atualizarAutoresTrabalho(addslashes($request->trabalho_id),$autores_id))
+            {
+                return 2;
+            }
+            return true;
+        }
+
+      
+        return true;
+    }
+
+
+
+    //update mediado
+    public function updatemediado(Request $request)
+    {
+        //atualizar trabalho
+
+        $help=new Helper();
+        $t=new Trabalho();
+      
+        $caminho="";
+        if($request->file('arquivo')->isValid()){
+            //pegar o tamanho do ficheiro e converte-lo em MB
+            $filesize = $request->file('arquivo')->getSize();
+            $size = number_format($filesize / 1048576,2);
+           
+            if($request->hasFile('arquivo')!=null){
+                $requestarquivo = $request->arquivo;
+                $extensao = $requestarquivo->extension();
+                $nomearquivo = md5($requestarquivo->getClientOriginalName().strtotime("now")).".".$extensao;
+                $request->arquivo->move(public_path('trabalhos'),$nomearquivo);
+                $caminho = $nomearquivo;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+
+        $s=[
+            'categoria_id'=>$help->clear($request->categoria),
+            'colecao_id'=>$help->clear($request->colecao),
+            'caminho'=>$caminho,
+            'estado'=>'aprovado'
         ];
         $t=Trabalho::findOrFail(addslashes($request->trabalho_id));
         $t->update($s);

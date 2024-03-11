@@ -99,6 +99,10 @@ class TrabalhoService
     {
         return $this->db->updateAuto($request);
     }
+    public function updatemediado(Request $request)
+    {
+        return $this->db->updatemediado($request);
+    }
 
 
 

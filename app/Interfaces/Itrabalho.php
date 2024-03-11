@@ -26,6 +26,7 @@ interface Itrabalho
     public function getAllMediado();
 
     public function updateAuto(Request $request);
+    public function updatemediado(Request $request);
 
     //estatisticas
     public function countTcc();

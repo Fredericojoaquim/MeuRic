@@ -237,6 +237,19 @@ class trabalhoController extends Controller
     return view('trabalhos.auto-arquivamento.alterar',['colecoes'=>$colecoes, 'categorias'=>$categorias,'t'=>$trabalho,'orientador'=>$orientador,'autores'=>$autores]);
    }
 
+   public function mediado_edit($id)
+   {
+    $h=new Helper();
+    
+    $trabalho=$this->trabalhoservice->getById($id);
+    $colecoes=$this->servicecolecao->getAll();
+    $categorias=$this->servicecategoria->getAll();
+    $orientador=$this->orientadorservice->getAll();
+    $autores=$h->nomesAutoresPorTrabalho($id);
+    return view('trabalhos.mediado.alterar',['colecoes'=>$colecoes, 'categorias'=>$categorias,'t'=>$trabalho,'orientador'=>$orientador,'autores'=>$autores]);
+
+   }
+
    public function trabalho_user_update(Request $request)
    {
         $dados=$this->trabalhoservice->getAllAuto();
@@ -249,6 +262,22 @@ class trabalhoController extends Controller
         return view('trabalhos.auto-arquivamento.listar',['erro'=>'Erro ao submeter o trabalho, arquivo corrompido ou danificado']);
 
         
+
+   }
+
+
+   public function updatemediado(Request $request)
+   {
+    
+
+    if($this->trabalhoservice->updatemediado($request))
+    {
+        $dados=$this->trabalhoservice->getAllMediado();
+        return view('trabalhos.mediado.listar',['trabalhos'=>$dados,'sms'=>'trabalho alterado com sucesso']);
+    }
+
+    return view('trabalhos.mediado.listar',['trabalhos'=>$dados,'erro'=>'erro ao alterar o trabalho, por favor tente mais tarde']);
+
 
    }
 

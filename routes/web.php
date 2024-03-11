@@ -49,18 +49,33 @@ Route::get('/login', function () {
 });
 
 //coleção
-Route::get('colecao/create', [ColecaoController::class,'create']);
-Route::get('colecao/listar', [ColecaoController::class,'index']);
-Route::post('colecao/registar', [ColecaoController::class,'store']);
-Route::get('colecao/edit/{id}', [ColecaoController::class,'edit']);
-Route::put('colecao/alterar', [ColecaoController::class,'update']);
+Route::get('colecao/create', [ColecaoController::class,'create'])->middleware('admin');
+Route::get('colecao/listar', [ColecaoController::class,'index'])->middleware('admin');
+Route::post('colecao/registar', [ColecaoController::class,'store'])->middleware('admin');
+Route::get('colecao/edit/{id}', [ColecaoController::class,'edit'])->middleware('admin');
+Route::put('colecao/alterar', [ColecaoController::class,'update'])->middleware('admin');
 
 //categoria
-Route::get('categoria/create', [CategoriaController::class,'create']);
-Route::post('categoria/registar', [CategoriaController::class,'store']);
-Route::get('categoria/listar', [CategoriaController::class,'index']);
-Route::get('categoria/edit/{id}', [CategoriaController::class,'edit']);
-Route::put('categoria/alterar', [CategoriaController::class,'update']);
+Route::get('categoria/create', [CategoriaController::class,'create'])->middleware('admin');
+Route::post('categoria/registar', [CategoriaController::class,'store'])->middleware('admin');
+Route::get('categoria/listar', [CategoriaController::class,'index'])->middleware('admin');
+Route::get('categoria/edit/{id}', [CategoriaController::class,'edit'])->middleware('admin');
+Route::put('categoria/alterar', [CategoriaController::class,'update'])->middleware('admin');
+
+//orientador
+Route::get('orientador/create', [OrientadorController::class,'create'])->middleware('admin');
+Route::post('orientador/registar', [OrientadorController::class,'store'])->middleware('admin');
+Route::get('orientador/listar', [OrientadorController::class,'index'])->middleware('admin');
+Route::get('orientador/edit/{id}', [OrientadorController::class,'edit'])->middleware('admin');
+Route::put('orientador/alterar', [OrientadorController::class,'update'])->middleware('admin');
+//users
+Route::get('user/create', [UserController::class,'create'])->middleware('admin');
+Route::post('user/salvar', [UserController::class,'store'])->middleware('admin');
+Route::get('user/listar', [UserController::class,'index'])->middleware('admin');
+Route::PUT('user/bloquear', [UserController::class,'bloquear'])->middleware('admin');
+Route::PUT('user/desbloquear', [UserController::class,'desbloquear'])->middleware('admin');
+Route::get('user/aterar/{id}', [UserController::class,'edit'])->middleware('admin');
+Route::PUT('user/alterar', [UserController::class,'update'])->middleware('admin');
 
 //trabalhos-autoarquivamento
 Route::get('trabalho/autoarquivamento/create', [TrabalhoController::class,'autoArquivamentoCreate']);
@@ -70,28 +85,16 @@ Route::get('trabalho/autoarquivamento/detalhes/{id}', [TrabalhoController::class
 Route::get('trabalho/autoarquivamento/user-edit/{id}', [TrabalhoController::class,'trabalho_user_edit']);
 Route::put('trabalho/autoarquivamento/user-update', [TrabalhoController::class,'trabalho_user_update']);
 //listar auto arquivamneto bibliotecario
-Route::get('trabalho/auto-arquivamento/aprovar/{id}', [TrabalhoController::class,'aprovar']);
-Route::put('trabalho/auto-arquivamento/regeitar', [TrabalhoController::class,'regeitar']);
+Route::get('trabalho/auto-arquivamento/aprovar/{id}', [TrabalhoController::class,'aprovar'])->middleware('bibliotecario');
+Route::put('trabalho/auto-arquivamento/regeitar', [TrabalhoController::class,'regeitar'])->middleware('bibliotecario');
 Route::get('trabalho/auto-arquivamento/listar',[TrabalhoController::class,'ListarAuto']);
 //trabalhos-arquivamento mediado
-Route::get('trabalho/mediado/create', [TrabalhoController::class,'mediadoCreate']);
-Route::post('trabalho/arquivamento-mediado/registar', [TrabalhoController::class,'mediadoSave']);
-Route::get('trabalho/arquivamento-mediado/listar', [TrabalhoController::class,'arquivamentoMediadoListar']);
-//orientador
-Route::get('orientador/create', [OrientadorController::class,'create']);
-Route::post('orientador/registar', [OrientadorController::class,'store']);
-Route::get('orientador/listar', [OrientadorController::class,'index']);
-Route::get('orientador/edit/{id}', [OrientadorController::class,'edit']);
-Route::put('orientador/alterar', [OrientadorController::class,'update']);
-//users
+Route::get('trabalho/mediado/create', [TrabalhoController::class,'mediadoCreate'])->middleware('bibliotecario');
+Route::post('trabalho/arquivamento-mediado/registar', [TrabalhoController::class,'mediadoSave'])->middleware('bibliotecario');
+Route::get('trabalho/arquivamento-mediado/listar', [TrabalhoController::class,'arquivamentoMediadoListar'])->middleware('bibliotecario');
+Route::get('trabalho/arquivamento-mediado/edit/{id}', [TrabalhoController::class,'mediado_edit'])->middleware('bibliotecario');
+Route::put('trabalho/arquivamento-mediado/update', [TrabalhoController::class,'updatemediado'])->middleware('bibliotecario');
 
-Route::get('user/create', [UserController::class,'create']);
-Route::post('user/salvar', [UserController::class,'store']);
-Route::get('user/listar', [UserController::class,'index']);
-Route::PUT('user/bloquear', [UserController::class,'bloquear']);
-Route::PUT('user/desbloquear', [UserController::class,'desbloquear']);
-Route::get('user/aterar/{id}', [UserController::class,'edit']);
-Route::PUT('user/alterar', [UserController::class,'update']);
 //home
 Route::get('Home/sobre', [HomeController::class,'sobre']);
 Route::get('Home/percorrer-titulo', [HomeController::class,'percorerrPorTitulo']);

@@ -13,6 +13,25 @@
       <div class="card-body">
         <h4 class="card-title text-center text-primary my-size-text"> <strong>Arquivamento-Mediado</strong> </h4>
 
+        @if (@isset($sms))
+
+            <div class="row grid-margin stretch-card">
+              <div class="alert alert-success" role="alert">
+                <p>{{$sms}}</p>
+            </div>
+            </div>
+         @endif
+
+         @if(isset($erro))
+
+         <div class="row">
+          <div class="alert alert-danger" id="erro-registar">
+            <p class="text-center">{{ $erro}}</p>
+
+        </div>
+          
+         @endif
+
         <div class="table-responsive">
           <table class="table table-striped" id="datatable">
             <thead>
@@ -38,7 +57,7 @@
                     <td> {{$c->data_criacao}}  </td>
                     <td> {{$c->estado}}  </td>
                     <td class="d-flex justify-content-center"> 
-                      <a href="#"  class="btn btn-primary me-2 font-button">Alterar</a>
+                      <a href="{{url("trabalho/arquivamento-mediado/edit/$c->codigo")}}"  class="btn btn-primary me-2 font-button">Alterar</a>
                       <a href="{{url("trabalho/autoarquivamento/detalhes/$c->codigo")}}"  class="btn btn-info me-2 font-button">Detalhes</a>
                     </td>
               </tr>

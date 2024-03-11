@@ -367,6 +367,9 @@
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
+          @can('admin')
+            
+          
           <li class="nav-item nav-category">Configurações</li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
@@ -413,6 +416,7 @@
               </ul>
             </div>
           </li>
+          @endcan
           <li class="nav-item nav-category">Submissões</li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
@@ -440,6 +444,9 @@
               </ul>
             </div>
           </li>
+          @can('admin')
+            
+          
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
               <i class="menu-icon mdi mdi-account-circle-outline"></i>
@@ -453,6 +460,7 @@
               </ul>
             </div>
           </li>
+          @endcan
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
               <i class="menu-icon mdi mdi-layers-outline"></i>
