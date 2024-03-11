@@ -21,6 +21,16 @@
             </div>
          @endif
 
+         @if(isset($erro))
+
+         <div class="row">
+          <div class="alert alert-danger" id="erro-registar">
+            <p class="text-center">{{ $erro}}</p>
+
+        </div>
+          
+         @endif
+
         <div class="table-responsive">
           <table class="table table-striped" id="datatable">
             <thead>

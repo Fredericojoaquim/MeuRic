@@ -240,9 +240,15 @@ class trabalhoController extends Controller
    public function trabalho_user_update(Request $request)
    {
         $dados=$this->trabalhoservice->getAllAuto();
-        $this->trabalhoservice->updateAuto($request);
+        if($this->trabalhoservice->updateAuto($request))
+        {
+            $dados=$this->trabalhoservice->getAllAuto();
+            return view('trabalhos.auto-arquivamento.listar',['trabalhos'=>$dados,'sms'=>'trabalho alterado com suscesso']);
+            
+        }
+        return view('trabalhos.auto-arquivamento.listar',['erro'=>'Erro ao submeter o trabalho, arquivo corrompido ou danificado']);
 
-        return view('trabalhos.auto-arquivamento.listar',['trabalhos'=>$dados,'sms'=>'trabalho alterado com suscesso']);
+        
 
    }
 
