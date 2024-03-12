@@ -538,6 +538,45 @@ class TrabalhoRepository implements Itrabalho
 
     }
 
+    public function allAproved()
+    {
+        $p=DB::table('trabalhos')
+        ->join('categorias','categorias.id','=','trabalhos.categoria_id')
+        ->join('colecoes','colecoes.id','=','trabalhos.colecao_id')
+        ->join('metadados','metadados.trabalho_id','=','trabalhos.id')
+        ->where('trabalhos.estado','=','aprovado')
+        ->orderBy('categorias.descricao','asc')
+        ->select('trabalhos.*','trabalhos.id as codigo','categorias.descricao as categoria','colecoes.descricao as colecao', 'metadados.*')
+        ->count();
+        
+        return $p;
+    }
+
+
+    public function allRejeted()
+    {
+        $p=DB::table('trabalhos')
+        ->join('categorias','categorias.id','=','trabalhos.categoria_id')
+        ->join('colecoes','colecoes.id','=','trabalhos.colecao_id')
+        ->join('metadados','metadados.trabalho_id','=','trabalhos.id')
+        ->where('trabalhos.estado','=','aprovado')
+        ->orderBy('categorias.descricao','asc')
+        ->select('trabalhos.*','trabalhos.id as codigo','categorias.descricao as categoria','colecoes.descricao as colecao', 'metadados.*')
+        ->count();
+        
+        return $p;
+    }
+
+
+    public function allwork()
+    {
+        $p=DB::table('trabalhos')
+        ->count();
+        return $p;
+    }
+
+    /**--------------------------------------*/
+
 
     public function aprovar($id)
     {

@@ -31,6 +31,9 @@ interface Itrabalho
     //estatisticas
     public function countTcc();
     public function countArtigoCientifico();
+    public function allAproved();
+    public function allRejeted();
+    public function allwork();
     
 
     // Adicione outros métodos conforme necessário

@@ -7,6 +7,8 @@ use App\Http\Controllers\TrabalhoController;
 use App\Http\Controllers\OrientadorController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
+use App\Repositories\TrabalhoRepository;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +27,11 @@ use App\Http\Controllers\HomeController;
 Route::get('/', [HomeController::class,'index']);
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $t=new TrabalhoRepository();
+    $rejeitados=$t->allRejeted();
+    $aprovados=$t->allAproved();
+    $todos=$t->allwork();
+    return view('dashboard',['trabalhos'=>$t->countTcc(),'aprovados'=>$aprovados,'rejeitados'=>$rejeitados,'todos'=>$todos]);
 })->middleware(['auth'])->name('dashboard');
 
 //rotas de teste

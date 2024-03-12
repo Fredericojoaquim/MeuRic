@@ -495,32 +495,37 @@
                   <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
                     <div class="tab-content tab-content-basic">
                       <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
+                        @can('admin')
+                          
+                       
                         <div class="row">
                           <div class="col-sm-12">
                             <div class="statistics-details d-flex align-items-center justify-content-between">
                               <div>
-                                <p class="statistics-title">Bounce Rate</p>
-                                <h3 class="rate-percentage">32.53%</h3>
-                                <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>-0.5%</span></p>
+                                <p class="statistics-title  text-center">Total de Trabalhos <br> submetidos</p>
+                              
+                                <h3 class="rate-percentage text-center">{{$todos }}</h3>
+                                
+                                <p class="text-danger d-flex text-center"><i class="mdi mdi-menu-down"></i><span>-0.5%</span></p>
                               </div>
                               <div>
-                                <p class="statistics-title">Page Views</p>
+                                <p class="statistics-title">Arquivamento-Mediado</p>
                                 <h3 class="rate-percentage">7,682</h3>
                                 <p class="text-success d-flex"><i class="mdi mdi-menu-up"></i><span>+0.1%</span></p>
                               </div>
                               <div>
-                                <p class="statistics-title">New Sessions</p>
+                                <p class="statistics-title">Auto-arquivamentos</p>
                                 <h3 class="rate-percentage">68.8</h3>
                                 <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>68.8</span></p>
                               </div>
                               <div class="d-none d-md-block">
-                                <p class="statistics-title">Avg. Time on Site</p>
-                                <h3 class="rate-percentage">2m:35s</h3>
+                                <p class="statistics-title">Trabalhos Aprovados</p>
+                                <h3 class="rate-percentage">{{$aprovados}}</h3>
                                 <p class="text-success d-flex"><i class="mdi mdi-menu-down"></i><span>+0.8%</span></p>
                               </div>
                               <div class="d-none d-md-block">
-                                <p class="statistics-title">New Sessions</p>
-                                <h3 class="rate-percentage">68.8</h3>
+                                <p class="statistics-title">Trabalhos rejeitados</p>
+                                <h3 class="rate-percentage">{{$rejeitados}}</h3>
                                 <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>68.8</span></p>
                               </div>
                               <div class="d-none d-md-block">
@@ -531,6 +536,7 @@
                             </div>
                           </div>
                         </div> 
+                        @endcan
                   
                     @yield('content')
 
@@ -543,7 +549,7 @@
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
         <footer class="footer">
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+          <div class="centralizada">
             
             <span class="d-block mt-1 mt-sm-0 text-center">RIC-Repositorio institucional da Computação © 2024. All rights reserved.</span>
           </div>
