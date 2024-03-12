@@ -11,7 +11,7 @@
     <div class="card">
        
       <div class="card-body">
-        <h4 class="card-title text-center text-primary my-size-text"> <strong>>Meus trabalhos</strong> </h4>
+        <h4 class="card-title text-center text-primary my-size-text"> <strong>Meus trabalhos</strong> </h4>
         @if (@isset($sms))
 
             <div class="row grid-margin stretch-card">

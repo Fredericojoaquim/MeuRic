@@ -461,6 +461,9 @@
             </div>
           </li>
           @endcan
+          @can('Bibliotecário')
+            
+          
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
               <i class="menu-icon mdi mdi-layers-outline"></i>
@@ -473,6 +476,7 @@
               </ul>
             </div>
           </li>
+          @endcan
         </ul>
       </nav>
       <!-- partial -->
