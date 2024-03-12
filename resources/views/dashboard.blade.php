@@ -66,39 +66,6 @@
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item dropdown d-none d-lg-block">
-            <a class="nav-link dropdown-bordered dropdown-toggle dropdown-toggle-split" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false"> Select Category </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="messageDropdown">
-              <a class="dropdown-item py-3" >
-                <p class="mb-0 font-weight-medium float-left">Select category</p>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item">
-                <div class="preview-item-content flex-grow py-2">
-                  <p class="preview-subject ellipsis font-weight-medium text-dark">Bootstrap Bundle </p>
-                  <p class="fw-light small-text mb-0">This is a Bundle featuring 16 unique dashboards</p>
-                </div>
-              </a>
-              <a class="dropdown-item preview-item">
-                <div class="preview-item-content flex-grow py-2">
-                  <p class="preview-subject ellipsis font-weight-medium text-dark">Angular Bundle</p>
-                  <p class="fw-light small-text mb-0">Everything you’ll ever need for your Angular projects</p>
-                </div>
-              </a>
-              <a class="dropdown-item preview-item">
-                <div class="preview-item-content flex-grow py-2">
-                  <p class="preview-subject ellipsis font-weight-medium text-dark">VUE Bundle</p>
-                  <p class="fw-light small-text mb-0">Bundle of 6 Premium Vue Admin Dashboard</p>
-                </div>
-              </a>
-              <a class="dropdown-item preview-item">
-                <div class="preview-item-content flex-grow py-2">
-                  <p class="preview-subject ellipsis font-weight-medium text-dark">React Bundle</p>
-                  <p class="fw-light small-text mb-0">Bundle of 8 Premium React Admin Dashboard</p>
-                </div>
-              </a>
-            </div>
-          </li>
           <li class="nav-item d-none d-lg-block">
             <div id="datepicker-popup" class="input-group date datepicker navbar-date-picker">
               <span class="input-group-addon input-group-prepend border-right">
@@ -198,18 +165,17 @@
               <div class="dropdown-header text-center">
                 <img class="img-md rounded-circle" src="{{asset('images/faces/face8.jpg')}}" alt="Profile image">
                 <p class="mb-1 mt-3 font-weight-semibold">{{Auth::user()->name}}</p>
-               
+                <p class="fw-light text-muted mb-0">{{Auth::user()->email}}</p>
               </div>
               <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile <span class="badge badge-pill badge-danger">1</span></a>
               <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-message-text-outline text-primary me-2"></i> Messages</a>
               <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-calendar-check-outline text-primary me-2"></i> Activity</a>
               <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i> FAQ</a>
+              
               @auth
-              <form action="/logout" method="POST">
+              <form action="{{url('/logout')}}" method="POST">
                    @csrf
-                   
-                   <button class="dropdown-item" type="submit"><i class="dropdown-item-icon mdi mdi-power text-primary me-2" onclick="event.preventDefault(); this.closest('form').submit();"></i>Sign Out</button>
-                   
+                   <button class="dropdown-item" type="submit"><i class="dropdown-item-icon mdi mdi-power text-primary me-2" onclick="event.preventDefault(); this.closest('form').submit();"></i>Sign Out</button>    
               </form>
            @endauth
             </div>
@@ -401,6 +367,9 @@
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
+          @can('admin')
+            
+          
           <li class="nav-item nav-category">Configurações</li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
@@ -447,7 +416,12 @@
               </ul>
             </div>
           </li>
+          @endcan
+
           <li class="nav-item nav-category">Submissões</li>
+          @can('Estudante')
+            
+          
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
               <i class="menu-icon mdi mdi-card-text-outline"></i>
@@ -461,6 +435,7 @@
               </ul>
             </div>
           </li>
+          @endcan
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
               <i class="menu-icon mdi mdi-card-text-outline"></i>
@@ -474,6 +449,9 @@
               </ul>
             </div>
           </li>
+          @can('admin')
+            
+          
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
               <i class="menu-icon mdi mdi-account-circle-outline"></i>
@@ -487,10 +465,14 @@
               </ul>
             </div>
           </li>
+          @endcan
+          @can('Bibliotecário')
+            
+          
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
               <i class="menu-icon mdi mdi-layers-outline"></i>
-              <span class="menu-title">Auto-Arquivamento<</span>
+              <span class="menu-title">Auto-Arquivamento</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="icons">
@@ -499,10 +481,7 @@
               </ul>
             </div>
           </li>
-          
-         
-         
-          
+          @endcan
         </ul>
       </nav>
       <!-- partial -->
@@ -514,42 +493,44 @@
                
                 <div class="tab-content tab-content-basic">
                   <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
-                    <div class="row">
-                      <div class="col-sm-12">
-                        <div class="statistics-details d-flex align-items-center justify-content-between">
-                          <div>
-                            <p class="statistics-title">Bounce Rate</p>
-                            <h3 class="rate-percentage">32.53%</h3>
-                            <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>-0.5%</span></p>
+                    <div class="tab-content tab-content-basic">
+                      <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <div class="statistics-details d-flex align-items-center justify-content-between">
+                              <div>
+                                <p class="statistics-title">Bounce Rate</p>
+                                <h3 class="rate-percentage">32.53%</h3>
+                                <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>-0.5%</span></p>
+                              </div>
+                              <div>
+                                <p class="statistics-title">Page Views</p>
+                                <h3 class="rate-percentage">7,682</h3>
+                                <p class="text-success d-flex"><i class="mdi mdi-menu-up"></i><span>+0.1%</span></p>
+                              </div>
+                              <div>
+                                <p class="statistics-title">New Sessions</p>
+                                <h3 class="rate-percentage">68.8</h3>
+                                <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>68.8</span></p>
+                              </div>
+                              <div class="d-none d-md-block">
+                                <p class="statistics-title">Avg. Time on Site</p>
+                                <h3 class="rate-percentage">2m:35s</h3>
+                                <p class="text-success d-flex"><i class="mdi mdi-menu-down"></i><span>+0.8%</span></p>
+                              </div>
+                              <div class="d-none d-md-block">
+                                <p class="statistics-title">New Sessions</p>
+                                <h3 class="rate-percentage">68.8</h3>
+                                <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>68.8</span></p>
+                              </div>
+                              <div class="d-none d-md-block">
+                                <p class="statistics-title">Avg. Time on Site</p>
+                                <h3 class="rate-percentage">2m:35s</h3>
+                                <p class="text-success d-flex"><i class="mdi mdi-menu-down"></i><span>+0.8%</span></p>
+                              </div>
+                            </div>
                           </div>
-                          <div>
-                            <p class="statistics-title">Page Views</p>
-                            <h3 class="rate-percentage">7,682</h3>
-                            <p class="text-success d-flex"><i class="mdi mdi-menu-up"></i><span>+0.1%</span></p>
-                          </div>
-                          <div>
-                            <p class="statistics-title">New Sessions</p>
-                            <h3 class="rate-percentage">68.8</h3>
-                            <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>68.8</span></p>
-                          </div>
-                          <div class="d-none d-md-block">
-                            <p class="statistics-title">Avg. Time on Site</p>
-                            <h3 class="rate-percentage">2m:35s</h3>
-                            <p class="text-success d-flex"><i class="mdi mdi-menu-down"></i><span>+0.8%</span></p>
-                          </div>
-                          <div class="d-none d-md-block">
-                            <p class="statistics-title">New Sessions</p>
-                            <h3 class="rate-percentage">68.8</h3>
-                            <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>68.8</span></p>
-                          </div>
-                          <div class="d-none d-md-block">
-                            <p class="statistics-title">Avg. Time on Site</p>
-                            <h3 class="rate-percentage">2m:35s</h3>
-                            <p class="text-success d-flex"><i class="mdi mdi-menu-down"></i><span>+0.8%</span></p>
-                          </div>
-                        </div>
-                      </div>
-                    </div> 
+                        </div> 
                   
                     @yield('content')
 
@@ -563,8 +544,8 @@
         <!-- partial:partials/_footer.html -->
         <footer class="footer">
           <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash.</span>
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © 2021. All rights reserved.</span>
+            
+            <span class="d-block mt-1 mt-sm-0 text-center">RIC-Repositorio institucional da Computação © 2024. All rights reserved.</span>
           </div>
         </footer>
         <!-- partial -->
