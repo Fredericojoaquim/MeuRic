@@ -55,8 +55,13 @@
                     <td> {{$c->categoria}}  </td>
                     <td> {{$c->data_criacao}}  </td>
                     <td> {{$c->estado}}  </td>
-                    <td class="d-flex justify-content-center"> 
+                    <td class="d-flex justify-content-center">
+                      @if($c->estado=='pendente')
                       <a href="{{url("trabalho/autoarquivamento/user-edit/$c->codigo")}}"  class="btn btn-primary me-2 font-button">Alterar</a>
+                      @else
+                      <button class="btn btn-primary me-2 font-button" disabled>Alterar</button>
+                      @endif 
+                     
                       <a href="{{url("trabalho/autoarquivamento/detalhes/$c->codigo")}}"  class="btn btn-info me-2 font-button">Detalhes</a>
                     </td>
               </tr>

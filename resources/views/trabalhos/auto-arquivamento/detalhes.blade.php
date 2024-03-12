@@ -20,25 +20,27 @@
 </div>
 
 <div class="row justify-content-end">
-    <div>
-     <div class="float-right">
+    @can('Bibliotecário')
+        <div>
+        <div class="float-right">
 
-        @if($dado->estado=='pendente')
-            <a href="{{url("trabalho/auto-arquivamento/aprovar/$dado->codigo")}}" class="btn  me-2 font-button" style="background-color: green">Aprovar</a>
-            <button  class="btn me-2 font-button" style="background-color:red" data-toggle="modal" onclick="retornaid({{$dado->codigo}})"  data-target="#mymodal">Regeitar</button>
-         
+            @if($dado->estado=='pendente')
+                <a href="{{url("trabalho/auto-arquivamento/aprovar/$dado->codigo")}}" class="btn  me-2 font-button" style="background-color: green">Aprovar</a>
+                <button  class="btn me-2 font-button" style="background-color:red" data-toggle="modal" onclick="retornaid({{$dado->codigo}})"  data-target="#mymodal">Regeitar</button>
             
-        @else
-            <button disabled class="btn  me-2 font-button" style="background-color: green">Aprovar</button>
-            <button disabled class="btn me-2 font-button" style="background-color:red">Regeitar</button>
-        @endif
-      
+                
+            @else
+                <button disabled class="btn  me-2 font-button" style="background-color: green">Aprovar</button>
+                <button disabled class="btn me-2 font-button" style="background-color:red">Regeitar</button>
+            @endif
+        
 
+                
             
-         
-       
-     </div>
-    </div>
+        
+        </div>
+        </div>
+    @endcan
      
  </div>
 
