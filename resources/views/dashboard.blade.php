@@ -362,7 +362,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="{{url('/dashboard')}}">
               <i class="mdi mdi-grid-large menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
@@ -510,12 +510,12 @@
                               </div>
                               <div>
                                 <p class="statistics-title">Arquivamento-Mediado</p>
-                                <h3 class="rate-percentage">7,682</h3>
+                                <h3 class="rate-percentage">{{$allmediado}}</h3>
                                 <p class="text-success d-flex"><i class="mdi mdi-menu-up"></i><span>+0.1%</span></p>
                               </div>
                               <div>
                                 <p class="statistics-title">Auto-arquivamentos</p>
-                                <h3 class="rate-percentage">68.8</h3>
+                                <h3 class="rate-percentage">{{$allauto}}</h3>
                                 <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>68.8</span></p>
                               </div>
                               <div class="d-none d-md-block">

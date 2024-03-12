@@ -541,29 +541,32 @@ class TrabalhoRepository implements Itrabalho
     public function allAproved()
     {
         $p=DB::table('trabalhos')
-        ->join('categorias','categorias.id','=','trabalhos.categoria_id')
-        ->join('colecoes','colecoes.id','=','trabalhos.colecao_id')
-        ->join('metadados','metadados.trabalho_id','=','trabalhos.id')
         ->where('trabalhos.estado','=','aprovado')
-        ->orderBy('categorias.descricao','asc')
-        ->select('trabalhos.*','trabalhos.id as codigo','categorias.descricao as categoria','colecoes.descricao as colecao', 'metadados.*')
         ->count();
-        
         return $p;
     }
 
+    public function allAutoCount()
+    {
+        $p=DB::table('trabalhos')
+        ->where('trabalhos.tipo','=','Auto-arquivamento')
+        ->count();
+        return $p;
+    }
+
+    public function allMediadoCount()
+    {
+        $p=DB::table('trabalhos')
+        ->where('trabalhos.tipo','=','Arquivamento Mediado')
+        ->count();
+        return $p;
+    }
 
     public function allRejeted()
     {
         $p=DB::table('trabalhos')
-        ->join('categorias','categorias.id','=','trabalhos.categoria_id')
-        ->join('colecoes','colecoes.id','=','trabalhos.colecao_id')
-        ->join('metadados','metadados.trabalho_id','=','trabalhos.id')
-        ->where('trabalhos.estado','=','aprovado')
-        ->orderBy('categorias.descricao','asc')
-        ->select('trabalhos.*','trabalhos.id as codigo','categorias.descricao as categoria','colecoes.descricao as colecao', 'metadados.*')
+        ->where('trabalhos.estado','=','regeitado')
         ->count();
-        
         return $p;
     }
 

@@ -34,6 +34,8 @@ interface Itrabalho
     public function allAproved();
     public function allRejeted();
     public function allwork();
+    public function allAutoCount();
+    public function allMediadoCount();
     
 
     // Adicione outros métodos conforme necessário
