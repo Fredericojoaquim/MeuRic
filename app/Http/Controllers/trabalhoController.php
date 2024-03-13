@@ -259,11 +259,140 @@ class trabalhoController extends Controller
             return view('trabalhos.auto-arquivamento.listar',['trabalhos'=>$dados,'sms'=>'trabalho alterado com suscesso']);
             
         }
-        return view('trabalhos.auto-arquivamento.listar',['erro'=>'Erro ao submeter o trabalho, arquivo corrompido ou danificado']);
-
-        
+        return view('trabalhos.auto-arquivamento.listar',['erro'=>'Erro ao submeter o trabalho, arquivo corrompido ou danificado']);    
 
    }
+   /*docentes*/
+   public function trabalho_docente_update(Request $request)
+   {
+        $dados=$this->trabalhoservice->getAllAuto();
+        if($this->trabalhoservice->updateAuto($request))
+        {
+            $dados=$this->trabalhoservice->getAllAuto();
+            return view('trabalhos.auto-arquivamento.docente.listar',['trabalhos'=>$dados,'sms'=>'trabalho alterado com suscesso']);
+            
+        }
+        return view('trabalhos.auto-arquivamento.docente.listar',['erro'=>'Erro ao submeter o trabalho, arquivo corrompido ou danificado']);    
+
+   }
+
+
+   public function trabalho_docente_edit($id)
+   {
+    $h=new Helper();
+    
+    $trabalho=$this->trabalhoservice->getById($id);
+    $colecoes=$this->servicecolecao->getAll();
+    $categorias=$this->servicecategoria->getAll();
+    $orientador=$this->orientadorservice->getAll();
+    $autores=$h->nomesAutoresPorTrabalho($id);
+    return view('trabalhos.auto-arquivamento.docente.alterar',['colecoes'=>$colecoes, 'categorias'=>$categorias,'t'=>$trabalho,'orientador'=>$orientador,'autores'=>$autores]);
+   }
+
+
+
+   public function autoArquivamentoCreateDocente()
+    {
+        $orientador=$this->orientadorservice->getAll();
+        $colecoes=$this->servicecolecao->getAll();
+        $categorias=$this->servicecategoria->getAll();
+        return view('trabalhos.auto-arquivamento.docente.registar',['colecoes'=>$colecoes, 'categorias'=>$categorias,'orientador'=>$orientador]);
+    }
+
+
+
+    public function autoArquivamentoSaveDocente(Request $request)     
+    {
+        //return back()->withInput();
+       //dd($request);
+      
+
+        $colecoes=$this->servicecolecao->getAll();
+        $categorias=$this->servicecategoria->getAll();
+
+        if($this->trabalhoservice->saveAuto($request))
+        {
+            return view('trabalhos.auto-arquivamento.docente.registar',['colecoes'=>$colecoes, 'categorias'=>$categorias,'sms'=>'Trbalho submetido com sucesso, aguarda pela aprovação do Bibliotecário']);
+        }
+        return back()->withInput()->with('erro','Erro ao submeter o trabalho, arquivo corrompido ou danificado');
+        
+        //return view('trabalhos.auto-arquivamento.index',['colecoes'=>$colecoes, 'categorias'=>$categorias]);
+    }
+
+
+
+    public function mediadoCreateDocente()
+    {
+        $orientador=$this->orientadorservice->getAll();
+        $colecoes=$this->servicecolecao->getAll();
+        $categorias=$this->servicecategoria->getAll();
+        return view('trabalhos.mediado.docente.registar',['colecoes'=>$colecoes, 'categorias'=>$categorias,'orientador'=>$orientador]);
+
+    }
+
+
+    public function mediadoSaveDocente(Request $request)     
+    {
+        //return back()->withInput();
+       //dd($request);
+        $colecoes=$this->servicecolecao->getAll();
+        $categorias=$this->servicecategoria->getAll();
+
+        if($this->trabalhoservice->saveMediado($request))
+        {
+            return view('trabalhos.mediado.docente.registar',['colecoes'=>$colecoes, 'categorias'=>$categorias,'sms'=>'Trbalho submetido com sucesso, aguarda pela aprovação do Bibliotecário']);
+        }
+        return back()->withInput()->with('erro','Erro ao submeter o trabalho, arquivo corrompido ou danificado');
+        
+        //return view('trabalhos.auto-arquivamento.index',['colecoes'=>$colecoes, 'categorias'=>$categorias]);
+    }
+
+
+
+    public function arquivamentoMediadoListarDocente()
+    {
+
+        $dados=$this->trabalhoservice->getAllMediado();
+       
+        return view('trabalhos.mediado.docente.listar',['trabalhos'=>$dados]);
+
+    }
+
+
+    public function mediado_edit_docente($id)
+   {
+    $h=new Helper();
+    
+    $trabalho=$this->trabalhoservice->getById($id);
+    $colecoes=$this->servicecolecao->getAll();
+    $categorias=$this->servicecategoria->getAll();
+    $orientador=$this->orientadorservice->getAll();
+    $autores=$h->nomesAutoresPorTrabalho($id);
+    return view('trabalhos.mediado.alterar',['colecoes'=>$colecoes, 'categorias'=>$categorias,'t'=>$trabalho,'orientador'=>$orientador,'autores'=>$autores]);
+
+   }
+
+
+   public function updatemediadoDocente(Request $request)
+   {
+    
+
+    if($this->trabalhoservice->updatemediado($request))
+    {
+        $dados=$this->trabalhoservice->getAllMediado();
+        return view('trabalhos.mediado.docente.listar',['trabalhos'=>$dados,'sms'=>'trabalho alterado com sucesso']);
+    }
+
+    return view('trabalhos.mediado.docente.listar',['trabalhos'=>$dados,'erro'=>'erro ao alterar o trabalho, por favor tente mais tarde']);
+
+
+   }
+
+
+   
+
+   /*docentes*/
+
 
 
    public function updatemediado(Request $request)

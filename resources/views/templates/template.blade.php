@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title> @yield('title') </title>
   <!-- plugins:css -->
-  <link rel="stylesheet" href="{{url('endors/feather/feather.css')}}">
+  <link rel="stylesheet" href="{{url('vendors/feather/feather.css')}}">
   <link rel="stylesheet" href="{{url('vendors/mdi/css/materialdesignicons.min.css')}}">
   <link rel="stylesheet" href="{{url('vendors/ti-icons/css/themify-icons.css')}}">
   <link rel="stylesheet" href="{{url('vendors/typicons/typicons.css')}}">
@@ -418,6 +418,24 @@
           </li>
           @endcan
 
+          @can('admin')
+            
+          
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
+              <i class="menu-icon mdi mdi-account-circle-outline"></i>
+              <span class="menu-title">Utilizadores</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="tables">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{url("user/create")}}">Registar</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{url("user/listar")}}">Listar</a></li>
+              </ul>
+            </div>
+          </li>
+          @endcan
+
           <li class="nav-item nav-category">Submissões</li>
           @can('Estudante')
             
@@ -437,7 +455,7 @@
           </li>
           @endcan
 
-          @can('docente/pesquisador')
+         @can('docente/pesquisador')
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
               <i class="menu-icon mdi mdi-card-text-outline"></i>
@@ -452,8 +470,8 @@
             </div>
           </li>
         @endcan
-        
 
+        @can('Bibliotecário')
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
               <i class="menu-icon mdi mdi-card-text-outline"></i>
@@ -467,23 +485,10 @@
               </ul>
             </div>
           </li>
-          @can('admin')
-            
+        @endcan
+
+
           
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
-              <i class="menu-icon mdi mdi-account-circle-outline"></i>
-              <span class="menu-title">Utilizadores</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="tables">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{url("user/create")}}">Registar</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{url("user/listar")}}">Listar</a></li>
-              </ul>
-            </div>
-          </li>
-          @endcan
           @can('Bibliotecário')
             
           
@@ -513,7 +518,8 @@
                   <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
                     <div class="tab-content tab-content-basic">
                       <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
-                        
+                       
+                  
                     @yield('content')
 
                   </div>
@@ -526,6 +532,7 @@
         <!-- partial:partials/_footer.html -->
         <footer class="footer">
           <div class="centralizada">
+            
             <span class="d-block mt-1 mt-sm-0 text-center">RIC-Repositorio institucional da Computação © 2024. All rights reserved.</span>
           </div>
         </footer>
