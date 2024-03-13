@@ -85,13 +85,20 @@ Route::PUT('user/desbloquear', [UserController::class,'desbloquear'])->middlewar
 Route::get('user/aterar/{id}', [UserController::class,'edit'])->middleware('admin');
 Route::PUT('user/alterar', [UserController::class,'update'])->middleware('admin');
 
-//trabalhos-autoarquivamento
-Route::get('trabalho/autoarquivamento/create', [TrabalhoController::class,'autoArquivamentoCreate']);
-Route::post('trabalho/autoarquivamento/registar', [TrabalhoController::class,'autoArquivamentoSave']);
-Route::get('trabalho/autoarquivamento/listar', [TrabalhoController::class,'autoArquivamentoListar']);
-Route::get('trabalho/autoarquivamento/detalhes/{id}', [TrabalhoController::class,'show']);
-Route::get('trabalho/autoarquivamento/user-edit/{id}', [TrabalhoController::class,'trabalho_user_edit']);
-Route::put('trabalho/autoarquivamento/user-update', [TrabalhoController::class,'trabalho_user_update']);
+//trabalhos-autoarquivamento-Estudantes
+Route::get('trabalho/autoarquivamento/create', [TrabalhoController::class,'autoArquivamentoCreate'])->middleware('estudante');
+Route::post('trabalho/autoarquivamento/registar', [TrabalhoController::class,'autoArquivamentoSave'])->middleware('estudante');
+Route::get('trabalho/autoarquivamento/listar', [TrabalhoController::class,'autoArquivamentoListar'])->middleware('estudante');
+Route::get('trabalho/autoarquivamento/detalhes/{id}', [TrabalhoController::class,'show'])->middleware('estudante');
+Route::get('trabalho/autoarquivamento/user-edit/{id}', [TrabalhoController::class,'trabalho_user_edit'])->middleware('estudante');
+Route::put('trabalho/autoarquivamento/user-update', [TrabalhoController::class,'trabalho_user_update'])->middleware('estudante');
+//trabalhos-autoarquivamento-Docentes
+Route::get('trabalho/autoarquivamento/criar', [TrabalhoController::class,'autoArquivamentoCreate'])->middleware('docente');
+Route::post('trabalho/autoarquivamento/salvar', [TrabalhoController::class,'autoArquivamentoSave'])->middleware('docente');
+Route::get('trabalho/autoarquivamento/meus-trabalhos', [TrabalhoController::class,'autoArquivamentoListar'])->middleware('docente');
+Route::get('trabalho/autoarquivamento/docente/detalhes/{id}', [TrabalhoController::class,'show'])->middleware('docente');
+Route::get('trabalho/autoarquivamento/docente-edit/{id}', [TrabalhoController::class,'trabalho_user_edit'])->middleware('docente');
+Route::put('trabalho/autoarquivamento/docente-update', [TrabalhoController::class,'trabalho_user_update'])->middleware('docente');
 //listar auto arquivamneto bibliotecario
 Route::get('trabalho/auto-arquivamento/aprovar/{id}', [TrabalhoController::class,'aprovar'])->middleware('bibliotecario');
 Route::put('trabalho/auto-arquivamento/regeitar', [TrabalhoController::class,'regeitar'])->middleware('bibliotecario');

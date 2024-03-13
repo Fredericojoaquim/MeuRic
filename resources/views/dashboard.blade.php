@@ -418,6 +418,24 @@
           </li>
           @endcan
 
+          @can('admin')
+            
+          
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
+              <i class="menu-icon mdi mdi-account-circle-outline"></i>
+              <span class="menu-title">Utilizadores</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="tables">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{url("user/create")}}">Registar</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{url("user/listar")}}">Listar</a></li>
+              </ul>
+            </div>
+          </li>
+          @endcan
+
           <li class="nav-item nav-category">Submissões</li>
           @can('Estudante')
             
@@ -436,6 +454,24 @@
             </div>
           </li>
           @endcan
+
+         @can('docente/pesquisador')
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+              <i class="menu-icon mdi mdi-card-text-outline"></i>
+              <span class="menu-title">Auto arquivamento</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="{{url('trabalho/autoarquivamento/criar')}}">Registar</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{url('trabalho/autoarquivamento/meus-trabalhos')}}">Meus trabalhos</a></li>
+              </ul>
+            </div>
+          </li>
+        @endcan
+
+        @can('Bibliotecário')
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
               <i class="menu-icon mdi mdi-card-text-outline"></i>
@@ -449,23 +485,10 @@
               </ul>
             </div>
           </li>
-          @can('admin')
-            
+        @endcan
+
+
           
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
-              <i class="menu-icon mdi mdi-account-circle-outline"></i>
-              <span class="menu-title">Utilizadores</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="tables">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{url("user/create")}}">Registar</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{url("user/listar")}}">Listar</a></li>
-              </ul>
-            </div>
-          </li>
-          @endcan
           @can('Bibliotecário')
             
           

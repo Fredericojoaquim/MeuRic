@@ -68,5 +68,7 @@ class Kernel extends HttpKernel
         'CheckSessionExpiration'=>\App\Http\Middleware\CheckSessionExpiration::class,
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
         'bibliotecario'=>\App\Http\Middleware\BbibliotecarioMiddleware::class,
+        'docente'=>\App\Http\Middleware\DocenteMiddleware::class,
+        'estudante'=>\App\Http\Middleware\EstudanteMiddleware::class,
     ];
 }

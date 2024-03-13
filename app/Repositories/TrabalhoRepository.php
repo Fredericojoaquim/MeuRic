@@ -413,6 +413,7 @@ class TrabalhoRepository implements Itrabalho
         ->join('colecoes','colecoes.id','=','trabalhos.colecao_id')
         ->join('metadados','metadados.trabalho_id','=','trabalhos.id')
         ->where('trabalhos.tipo','=','Auto-arquivamento')
+        ->where('trabalhos.user_id','=',Auth::user()->id)
         ->select('trabalhos.*','trabalhos.id as codigo','categorias.descricao as categoria','colecoes.descricao as colecao', 'metadados.*')
         ->get();
         return $p;

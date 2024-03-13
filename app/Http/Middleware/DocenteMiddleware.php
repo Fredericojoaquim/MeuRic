@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Middleware;
+use Illuminate\Support\Facades\Auth;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class EstudanteMiddleware
+class DocenteMiddleware
 {
     /**
      * Handle an incoming request.
@@ -17,13 +17,12 @@ class EstudanteMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->hasPermissionTo('Estudante'))
-        {
-           return $next($request);
-      
-       }
-        // Se não tiver a permissão, redirecione ou retorne uma resposta de não autorizado
-        abort(403);
-        
+        if (Auth::check() && Auth::user()->hasPermissionTo('docente/pesquisador'))
+         {
+            return $next($request);
+       
+        }
+         // Se não tiver a permissão, redirecione ou retorne uma resposta de não autorizado
+         abort(403);
     }
 }
