@@ -36,6 +36,7 @@ interface Itrabalho
     public function allwork();
     public function allAutoCount();
     public function allMediadoCount();
+    public function allpendent();
     
 
     // Adicione outros métodos conforme necessário

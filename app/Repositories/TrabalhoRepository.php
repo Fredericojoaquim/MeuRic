@@ -571,6 +571,14 @@ class TrabalhoRepository implements Itrabalho
         return $p;
     }
 
+    public function allpendent()
+    {
+        $p=DB::table('trabalhos')
+        ->where('trabalhos.estado','=','pendente')
+        ->count();
+        return $p;
+    }
+
 
     public function allwork()
     {

@@ -33,7 +33,8 @@ Route::get('/dashboard', function () {
     $todos=$t->allwork();
     $alluto=$t->allAutoCount();
     $allmediado=$t->allMediadoCount();
-    return view('dashboard',['trabalhos'=>$t->countTcc(),'aprovados'=>$aprovados,'rejeitados'=>$rejeitados,'todos'=>$todos,'allauto'=>$alluto,'allmediado'=>$allmediado]);
+    $pendentes=$t->allpendent();
+    return view('dashboard',['trabalhos'=>$t->countTcc(),'aprovados'=>$aprovados,'rejeitados'=>$rejeitados,'todos'=>$todos,'allauto'=>$alluto,'allmediado'=>$allmediado,'pendentes'=>$pendentes]);
 })->middleware(['auth'])->name('dashboard');
 
 //rotas de teste
