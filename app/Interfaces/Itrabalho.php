@@ -27,6 +27,9 @@ interface Itrabalho
 
     public function updateAuto(Request $request);
     public function updatemediado(Request $request);
+    public function updatemediadDocente(Request $request);
+    public function saveMediadoDocente(Request $request);
+    public function getAllMediadoDocente();
 
     //estatisticas
     public function countTcc();
@@ -37,6 +40,7 @@ interface Itrabalho
     public function allAutoCount();
     public function allMediadoCount();
     public function allpendent();
+
     
 
     // Adicione outros métodos conforme necessário

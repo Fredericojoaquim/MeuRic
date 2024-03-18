@@ -54,7 +54,7 @@
                 </div>
              </div>
             <h4 class="card-title text-center text-primary"> <strong>Auto-Arquivamento</strong> </h4>
-                <form id="regForm" class="forms-sample without-margin" action="{{url('trabalho/autoarquivamento/registar')}}" method="POST" enctype="multipart/form-data" >
+                <form id="regForm" class="forms-sample without-margin" action="{{url('trabalho/arquivamento-mediado/docente/registar')}}" method="POST" enctype="multipart/form-data" >
                     @csrf 
                     <!-- One "tab" for each step in the form: -->
                     <div class="tab">

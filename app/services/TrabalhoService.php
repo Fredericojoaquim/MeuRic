@@ -104,6 +104,22 @@ class TrabalhoService
         return $this->db->updatemediado($request);
     }
 
+    public function saveMediadoDocente(Request $request)
+    {
+        return $this->db->saveMediadoDocente($request);
+    }
+
+    public function updatemediadDocente(Request $request)
+    {
+        return $this->db->updatemediadDocente($request);
+
+    }
+
+    public function getAllMediadoDocente()
+    {
+        return $this->db->getAllMediadoDocente();
+    }
+
 
 
     // Adicione outros métodos conforme necessário

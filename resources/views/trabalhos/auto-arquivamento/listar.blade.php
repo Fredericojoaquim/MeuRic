@@ -56,7 +56,7 @@
                     <td> {{$c->data_criacao}}  </td>
                     <td> {{$c->estado}}  </td>
                     <td class="d-flex justify-content-center">
-                      @if($c->estado=='pendente')
+                      @if($c->estado!='aprovado')
                       <a href="{{url("trabalho/autoarquivamento/user-edit/$c->codigo")}}"  class="btn btn-primary me-2 font-button">Alterar</a>
                       @else
                       <button class="btn btn-primary me-2 font-button" disabled>Alterar</button>

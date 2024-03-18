@@ -320,6 +320,14 @@ class trabalhoController extends Controller
     }
 
 
+    public function autoArquivamentoListarDocente()
+    {
+        $dados=$this->trabalhoservice->getAllAuto();
+       
+        return view('trabalhos.auto-arquivamento.docente.listar',['trabalhos'=>$dados]);
+    }
+
+
 
     public function mediadoCreateDocente()
     {
@@ -352,7 +360,7 @@ class trabalhoController extends Controller
     public function arquivamentoMediadoListarDocente()
     {
 
-        $dados=$this->trabalhoservice->getAllMediado();
+        $dados=$this->trabalhoservice->getAllMediadoDocente();
        
         return view('trabalhos.mediado.docente.listar',['trabalhos'=>$dados]);
 

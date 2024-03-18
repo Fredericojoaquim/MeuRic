@@ -488,6 +488,23 @@
         @endcan
 
 
+        @can('docente/pesquisador')
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
+              <i class="menu-icon mdi mdi-card-text-outline"></i>
+              <span class="menu-title">Arquivamento Mediado</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="charts">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{url('trabalho/mediado/docente/create')}}">Registar</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{url('trabalho/arquivamento-mediado/docente/listar')}}">Listar</a></li>
+              </ul>
+            </div>
+          </li>
+        @endcan
+
+
           
           @can('Bibliotecário')
             

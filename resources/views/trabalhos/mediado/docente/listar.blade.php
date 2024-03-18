@@ -58,7 +58,7 @@
                     <td> {{$c->estado}}  </td>
                     <td class="d-flex justify-content-center"> 
                       <a href="{{url("trabalho/arquivamento-mediado/edit/$c->codigo")}}"  class="btn btn-primary me-2 font-button">Alterar</a>
-                      <a href="{{url("trabalho/autoarquivamento/detalhes/$c->codigo")}}"  class="btn btn-info me-2 font-button">Detalhes</a>
+                      <a href="{{url("trabalho/arquivamento-mediado/docente/detalhes/$c->codigo")}}"  class="btn btn-info me-2 font-button">Detalhes</a>
                     </td>
               </tr>
               @endforeach
