@@ -56,7 +56,7 @@
                 </div>
               </div>
 
-            <h4 class="card-title text-center text-primary"> <strong>Arquivamento Mediado-Alterar</strong> </h4>
+            <h4 class="card-title text-center text-primary"> <strong>Arquivamento Mediado-Alterar-teste</strong> </h4>
                 @if(isset($t))
 
                 <form id="regForm" class="forms-sample without-margin" action="{{url('trabalho/arquivamento-mediado/update')}}" method="POST" enctype="multipart/form-data" >

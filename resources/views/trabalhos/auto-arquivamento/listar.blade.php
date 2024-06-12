@@ -78,7 +78,46 @@
     $(document).ready(function(){
             //codigo para inicializar a data table
               var table=$('#datatable').DataTable(); 
+
+
+              $('#datatable').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
+        }
     });
+
+    // Verifique se a DataTable já foi inicializada antes de recriá-la
+    if ($.fn.DataTable.isDataTable('#datatable')) {
+        // Destrua a DataTable existente antes de recriá-la
+        $('#datatable').DataTable().destroy();
+    }
+
+    $('#datatable').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
+        }
+    });
+    var table=$('#datatable').DataTable();
+   // Adicione classes do Bootstrap aos botões de paginação após a DataTable ser inicializada
+   $('#datatable_paginate .paginate_button').addClass('btn btn-outline-primary');
+
+// Personalize os ícones dos botões de paginação
+$('#datatable_previous').html('<i class="fas fa-chevron-left"></i> Anterior');
+$('#datatable_next').html('Próximo <i class="fas fa-chevron-right"></i>');
+
+              
+    });
+
+   
+
+   
+
+
+    
+   
+
+
+    
 
   </script>
 

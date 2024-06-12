@@ -120,6 +120,22 @@ class TrabalhoService
         return $this->db->getAllMediadoDocente();
     }
 
+    public function getAllByOrientador()
+    {
+        return $this->db->getAllByOrientador();
+
+    }
+
+    public function getByOrientador($orientador_id)
+    {
+        return $this->db->getByOrientador($orientador_id);
+    }
+
+    public function updatemediadoDocente(Request $request)
+    {
+        return $this->db->updatemediadoDocente($request);
+    }
+
 
 
     // Adicione outros métodos conforme necessário

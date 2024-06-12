@@ -18,6 +18,8 @@ use App\Rules\UniqueOrientador;
 class TrabalhoRepository implements Itrabalho
 {
 
+    
+
     public function getLastFiveRecords()
     {
         $p=DB::table('trabalhos')
@@ -324,6 +326,100 @@ class TrabalhoRepository implements Itrabalho
     }
 
 
+
+    //update mediado docente
+    public function updatemediadoDocente(Request $request)
+    {
+        //atualizar trabalho
+
+        $help=new Helper();
+        $t=new Trabalho();
+      
+        $caminho="";
+        if($request->file('arquivo')->isValid()){
+            //pegar o tamanho do ficheiro e converte-lo em MB
+            $filesize = $request->file('arquivo')->getSize();
+            $size = number_format($filesize / 1048576,2);
+           
+            if($request->hasFile('arquivo')!=null){
+                $requestarquivo = $request->arquivo;
+                $extensao = $requestarquivo->extension();
+                $nomearquivo = md5($requestarquivo->getClientOriginalName().strtotime("now")).".".$extensao;
+                $request->arquivo->move(public_path('trabalhos'),$nomearquivo);
+                $caminho = $nomearquivo;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+        //pegar o estado do trabalho
+        $estado_atual=Trabalho::findOrFail(addslashes($request->trabalho_id))->estado;
+
+    
+
+        $s=[
+            'categoria_id'=>$help->clear($request->categoria),
+            'colecao_id'=>$help->clear($request->colecao),
+            'caminho'=>$caminho,
+            'estado'=>'pendente'
+        ];
+        $t=Trabalho::findOrFail(addslashes($request->trabalho_id));
+        $t->update($s);
+
+          //metadados
+          $s=[
+            'titulo'=>$help->clear($request->titulo),
+            'orientador_id'=>$help->clear($request->orientador),
+            'lingua'=>$help->clear($request->lingua),
+            'data_criacao'=>date('y-m-d'),
+            'local'=>$help->clear($request->local),
+            'palavra_chave'=>$help->clear($request->palavra),
+            'formato'=>$extensao,
+            'resumo'=>$help->clear($request->resumo),
+            'fontes'=>$help->clear($request->fontes),
+            'tamanho'=>$size,
+            'trabalho_id'=>addslashes($request->trabalho_id),
+            ];
+            $m=Metadado::findOrFail(addslashes($request->metadado_id));
+            $m->update($s);
+    
+
+        //alterar autores*/
+        $autores=$help->separarStringPorVirgula($request->autor);
+        $autores_id=$help->buscarAutoresPorNome($autores);
+       // dd($autores_id);
+        if(count($autores_id)==0)
+        {
+            //novos autores
+            $autores=$help->separarStringPorVirgula($request->autor);
+            foreach($autores as $a)
+            {
+                $autor=new Autor();
+                $autor->nome=$a;
+                $autor->save();
+
+                //salvando os dados na tabela trabalho-autor
+                $tautor=new TrabalhoAutor();
+                $tautor->autor_id= $autor->id;
+                $tautor->trabalho_id=$t->id;
+                $tautor->save();
+            }
+            return true;
+        }else{
+
+            if(!$help->atualizarAutoresTrabalho(addslashes($request->trabalho_id),$autores_id))
+            {
+                return 2;
+            }
+            return true;
+        }
+
+      
+        return true;
+    }
+
+
     
 
 
@@ -413,12 +509,15 @@ class TrabalhoRepository implements Itrabalho
         ->join('colecoes','colecoes.id','=','trabalhos.colecao_id')
         ->join('metadados','metadados.trabalho_id','=','trabalhos.id')
         ->where('trabalhos.tipo','=','Auto-arquivamento')
-        ->where('trabalhos.user_id','=',Auth::user()->id)
+       // ->where('trabalhos.user_id','=',Auth::user()->id)
         ->select('trabalhos.*','trabalhos.id as codigo','categorias.descricao as categoria','colecoes.descricao as colecao', 'metadados.*')
         ->get();
         return $p;
 
     }
+
+
+
     // Implemente outros métodos conforme necessário
 
     public function getAllByTitle()
@@ -453,19 +552,35 @@ class TrabalhoRepository implements Itrabalho
 
     public function getAllByOrientador()
     {
-        $p=DB::table('trabalhos')
-        ->join('categorias','categorias.id','=','trabalhos.categoria_id')
-        ->join('colecoes','colecoes.id','=','trabalhos.colecao_id')
-        ->join('metadados','metadados.trabalho_id','=','trabalhos.id')
-        ->join('orientadores','orientadores.id','=','metadados.orientador_id')
+        $p=DB::table('orientadores')
+        ->join('metadados','metadados.orientador_id','=','orientadores.id')
+        ->join('trabalhos','trabalhos.id','=','metadados.trabalho_id')
         ->orderBy('orientadores.nome','asc')
         ->where('trabalhos.estado','=','aprovado')
-        ->select('trabalhos.*','trabalhos.id as codigo','categorias.descricao as categoria','orientadores.nome as orientador','colecoes.descricao as colecao', 'metadados.*')
-        ->get();
+        ->select('orientadores.id as codigo','orientadores.nome as orientador',DB::raw('COUNT(metadados.orientador_id) as qtd') )
+        ->groupBy('codigo', 'orientador')
+        ->paginate(10);
 
         return $p;
 
     }
+
+
+    public function getByOrientador($orientador_id)
+    {
+        $p=DB::table('trabalhos')
+        ->join('categorias','categorias.id','=','trabalhos.categoria_id')
+        ->join('colecoes','colecoes.id','=','trabalhos.colecao_id')
+        ->join('metadados','metadados.trabalho_id','=','trabalhos.id')
+        ->where('trabalhos.estado','=','aprovado')
+        ->where('metadados.orientador_id','=',$orientador_id)
+        ->orderBy('metadados.titulo','asc')
+        ->select('trabalhos.*','trabalhos.id as codigo','categorias.descricao as categoria','colecoes.descricao as colecao', 'metadados.*')
+        ->paginate(10);
+        
+        return $p;
+    }
+
     public function getAllByCollection()
     {
         /*$p=DB::table('trabalhos')

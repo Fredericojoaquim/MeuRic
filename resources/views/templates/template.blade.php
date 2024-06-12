@@ -6,31 +6,31 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title> @yield('title') </title>
-  <!-- plugins:css -->
-  <link rel="stylesheet" href="{{url('vendors/feather/feather.css')}}">
-  <link rel="stylesheet" href="{{url('vendors/mdi/css/materialdesignicons.min.css')}}">
-  <link rel="stylesheet" href="{{url('vendors/ti-icons/css/themify-icons.css')}}">
-  <link rel="stylesheet" href="{{url('vendors/typicons/typicons.css')}}">
-  <link rel="stylesheet" href="{{url('vendors/simple-line-icons/css/simple-line-icons.css')}}">
-  <link rel="stylesheet" href="{{url('vendors/css/vendor.bundle.base.css')}}">
-  <link rel="stylesheet" href="{{url('css/estilo.css')}}">
-   <!-- css submissão -->
-  <link rel="stylesheet" href="{{asset('css/submissao_style.css')}}">
-  <!-- endinject -->
-  <!-- Plugin css for this page -->
-  <link rel="stylesheet" href="{{url('vendors/datatables.net-bs4/dataTables.bootstrap4.css')}}">
-  <link rel="stylesheet" href="{{url('js/select.dataTables.min.css')}}">
-  <!-- End plugin css for this page -->
-  <!-- inject:css -->
-  <link rel="stylesheet" href="{{url('css/vertical-layout-light/style.css')}}">
-  <!-- endinject -->
-  <link rel="shortcut icon" href="{{url('images/favicon.png')}}" />
-
-  <link rel="stylesheet" href="{{url('../../vendors/select2/select2.min.css')}}">
-  <link rel="stylesheet" href="{{url('../../vendors/select2-bootstrap-theme/select2-bootstrap.min.css')}}">
-   <!-- DATA TABLE -->
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
-
+   <!-- plugins:css -->
+   <link rel="stylesheet" href="{{url('vendors/feather/feather.css')}}">
+   <link rel="stylesheet" href="{{url('vendors/mdi/css/materialdesignicons.min.css')}}">
+   <link rel="stylesheet" href="{{url('vendors/ti-icons/css/themify-icons.css')}}">
+   <link rel="stylesheet" href="{{url('vendors/typicons/typicons.css')}}">
+   <link rel="stylesheet" href="{{url('vendors/simple-line-icons/css/simple-line-icons.css')}}">
+   <link rel="stylesheet" href="{{url('vendors/css/vendor.bundle.base.css')}}">
+   <link rel="stylesheet" href="{{url('css/estilo.css')}}">
+    <!-- css submissão -->
+   <link rel="stylesheet" href="{{asset('css/submissao_style.css')}}">
+   <!-- endinject -->
+   <!-- Plugin css for this page -->
+   <link rel="stylesheet" href="{{url('vendors/datatables.net-bs4/dataTables.bootstrap4.css')}}">
+   <link rel="stylesheet" href="{{url('js/select.dataTables.min.css')}}">
+   <!-- End plugin css for this page -->
+   <!-- inject:css -->
+   <link rel="stylesheet" href="{{url('css/vertical-layout-light/style.css')}}">
+   <!-- endinject -->
+   <link rel="shortcut icon" href="{{url('images/favicon.png')}}" />
+ 
+   <link rel="stylesheet" href="{{url('../../vendors/select2/select2.min.css')}}">
+   <link rel="stylesheet" href="{{url('../../vendors/select2-bootstrap-theme/select2-bootstrap.min.css')}}">
+    <!-- DATA TABLE -->
+   <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+ 
 
   
 </head>
@@ -167,7 +167,8 @@
                 <p class="mb-1 mt-3 font-weight-semibold">{{Auth::user()->name}}</p>
                 <p class="fw-light text-muted mb-0">{{Auth::user()->email}}</p>
               </div>
-              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile <span class="badge badge-pill badge-danger">1</span></a>
+              <a class="dropdown-item" href="{{url('user/perfil')}}"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile <span class="badge badge-pill badge-danger">1</span></a>
+             
               <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-message-text-outline text-primary me-2"></i> Messages</a>
               <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-calendar-check-outline text-primary me-2"></i> Activity</a>
               <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i> FAQ</a>
@@ -371,23 +372,25 @@
             
           
           <li class="nav-item nav-category">Configurações</li>
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+
+          <li class="nav-item" id="menu-categoria">
+            <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="ui-basic">
               <i class="menu-icon mdi mdi-floor-plan"></i>
               <span class="menu-title">Categoria</span>
               <i class="menu-arrow"></i> 
             </a>
-            <div class="collapse" id="ui-basic">
+
+            <div class="collapse" id="form-elements">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{url('categoria/create')}}">Registar</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{url('categoria/listar')}}">Listar</a></li>
-                
+                <li> <a class="nav-link" href="{{url('categoria/create')}}">Registar</a></li>
+                <li> <a class="nav-link" href="{{url('categoria/listar')}}">Listar</a></li>
               </ul>
             </div>
           </li>
+          
 
-
-          <li class="nav-item">
+          
+          <li class="nav-item"  id="menu-colecao">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-colecao" aria-expanded="false" aria-controls="ui-colecao">
               <i class="menu-icon mdi mdi-floor-plan"></i>
               <span class="menu-title">Coleção</span>
@@ -395,14 +398,13 @@
             </a>
             <div class="collapse" id="ui-colecao">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{url('colecao/create')}}">Registar</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{url('colecao/listar')}}">Listar</a></li>
-               
+                <li> <a class="nav-link" href="{{url('colecao/create')}}">Registar</a></li>
+                <li> <a class="nav-link" href="{{url('colecao/listar')}}">Listar</a></li>
               </ul>
             </div>
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item" id="menu-orientador">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-orientador" aria-expanded="false" aria-controls="ui-orientador">
               <i class="menu-icon mdi mdi-floor-plan"></i>
               <span class="menu-title">Orientador</span>
@@ -410,8 +412,8 @@
             </a>
             <div class="collapse" id="ui-orientador">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{url('orientador/create')}}">Registar</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{url('orientador/listar')}}">Listar</a></li>
+                <li> <a class="nav-link" href="{{url('orientador/create')}}">Registar</a></li>
+                <li> <a class="nav-link" href="{{url('orientador/listar')}}">Listar</a></li>
                
               </ul>
             </div>
@@ -421,7 +423,7 @@
           @can('admin')
             
           
-          <li class="nav-item">
+          <li class="nav-item" id="menu-utilizador">
             <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
               <i class="menu-icon mdi mdi-account-circle-outline"></i>
               <span class="menu-title">Utilizadores</span>
@@ -429,8 +431,8 @@
             </a>
             <div class="collapse" id="tables">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{url("user/create")}}">Registar</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{url("user/listar")}}">Listar</a></li>
+                <li> <a class="nav-link" href="{{url("user/create")}}">Registar</a></li>
+                <li> <a class="nav-link" href="{{url("user/listar")}}">Listar</a></li>
               </ul>
             </div>
           </li>
@@ -560,39 +562,77 @@
   </div>
   <!-- container-scroller -->
 
-  <!-- plugins:js -->
-  <script src="{{url('vendors/js/vendor.bundle.base.js')}}"></script>
-  <!-- endinject -->
-  <!-- Plugin js for this page -->
-  <script src="{{url('vendors/chart.js/Chart.min.js')}}"></script>
-  <script src="{{url('vendors/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
-  <script src="{{url('vendors/progressbar.js/progressbar.min.js')}}"></script>
+ <!-- plugins:js -->
+ <script src="{{url('vendors/js/vendor.bundle.base.js')}}"></script>
+ <!-- endinject -->
+ <!-- Plugin js for this page -->
+ <script src="{{url('vendors/chart.js/Chart.min.js')}}"></script>
+ <script src="{{url('vendors/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
+ <script src="{{url('vendors/progressbar.js/progressbar.min.js')}}"></script>
 
-  <!-- End plugin js for this page -->
-  <!-- inject:js -->
-  <script src="{{url('js/off-canvas.js')}}"></script>
-  <script src="{{url('js/hoverable-collapse.js')}}"></script>
-  <script src="{{url('js/template.js')}}"></script>
-  <script src="{{url('js/settings.js')}}"></script>
-  <script src="{{url('js/todolist.js')}}"></script>
-  <!-- endinject -->
-  <!-- Custom js for this page-->
-  <script src="{{url('js/dashboard.js')}}"></script>
-  <script src="j{{url('js/Chart.roundedBarCharts.js')}}"></script>
-  <!-- End custom js for this page-->
-  <script src="{{url('../../js/file-upload.js')}}"></script>
-  <script src="{{url('../../js/typeahead.js')}}"></script>
-  <script src="{{url('../../js/select2.js')}}"></script>
-  <script src="{{url('../../vendors/typeahead.js/typeahead.bundle.min.js')}}"></script>
-  <script src="{{{url('../../vendors/select2/select2.min.js')}}}"></script>
-  <script src="{{url('../../vendors/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
+ <!-- End plugin js for this page -->
+ <!-- inject:js -->
+ <script src="{{url('js/off-canvas.js')}}"></script>
+ <script src="{{url('js/hoverable-collapse.js')}}"></script>
+ <script src="{{url('js/template.js')}}"></script>
+ <script src="{{url('js/settings.js')}}"></script>
+ <script src="{{url('js/todolist.js')}}"></script>
+ <!-- endinject -->
+ <!-- Custom js for this page-->
+ <script src="{{url('js/dashboard.js')}}"></script>
+ <script src="j{{url('js/Chart.roundedBarCharts.js')}}"></script>
+ <!-- End custom js for this page-->
+ <script src="{{url('../../js/file-upload.js')}}"></script>
+ <script src="{{url('../../js/typeahead.js')}}"></script>
+ <script src="{{url('../../js/select2.js')}}"></script>
+ <script src="{{url('../../vendors/typeahead.js/typeahead.bundle.min.js')}}"></script>
+ <script src="{{{url('../../vendors/select2/select2.min.js')}}}"></script>
+ <script src="{{url('../../vendors/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
 
-         <!--DATA TABLE-->
-   <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+        <!--DATA TABLE-->
+  <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
-  
- 
- 
+  <script>
+    $(document).ready(function() {
+
+        function removeActiveClassById(elementId) {
+            var element = $('#' + elementId);
+            if (element.hasClass('active')) {
+                element.removeClass('active');
+                
+              
+            } else {
+              
+            }
+        }
+
+        //função que fecha o dropdown
+        function fecharDropdown(elementId) {
+            var dropdown = document.getElementById(elementId);
+            if (dropdown.classList.contains('show')) {
+                var collapseInstance = bootstrap.Collapse.getInstance(dropdown);
+                if (!collapseInstance) {
+                    collapseInstance = new bootstrap.Collapse(dropdown);
+                }
+                collapseInstance.hide();
+            }
+        }
+
+        // Remover a classe 'active' dos elementos desejados
+        removeActiveClassById('menu-orientador');
+        removeActiveClassById('menu-utilizador');
+        removeActiveClassById('menu-colecao');
+        removeActiveClassById('menu-categoria');
+
+        fecharDropdown('ui-colecao');
+        fecharDropdown('form-elements');
+        fecharDropdown('ui-orientador');
+        fecharDropdown('tables');
+        
+    });
+
+  </script>
+
 </body>
 
 </html>

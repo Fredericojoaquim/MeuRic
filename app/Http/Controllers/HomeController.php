@@ -65,10 +65,31 @@ class HomeController extends Controller
 
     public function percorerrPorTitulo()
     {
+        
         $trabalhos=$this->trabalhoservice->getAllByTitle();
         return view('pagina-inicial.precorrer-por.assunto',['trabalhos'=>$trabalhos]);
        
     } 
+
+    public function percorerrPorOrientador()
+    {
+       
+        $trabalhos=$this->trabalhoservice->getAllByOrientador();
+       
+        return view('pagina-inicial.precorrer-por.orientador',['trabalhos'=>$trabalhos]);
+       
+    } 
+
+
+    public function getByOrientador($id)
+    {
+       
+        $trabalhos=$this->trabalhoservice->getByOrientador($id);
+       
+        return view('pagina-inicial.precorrer-por.assunto',['trabalhos'=>$trabalhos]);
+       
+    } 
+
     public function percorerrPorColecao()
     {
         $trabalhos=$this->trabalhoservice->getAllByCollection();

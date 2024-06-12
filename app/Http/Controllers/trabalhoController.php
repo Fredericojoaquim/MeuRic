@@ -359,7 +359,7 @@ class trabalhoController extends Controller
 
     public function arquivamentoMediadoListarDocente()
     {
-
+        
         $dados=$this->trabalhoservice->getAllMediadoDocente();
        
         return view('trabalhos.mediado.docente.listar',['trabalhos'=>$dados]);
@@ -369,6 +369,7 @@ class trabalhoController extends Controller
 
     public function mediado_edit_docente($id)
    {
+   
     $h=new Helper();
     
     $trabalho=$this->trabalhoservice->getById($id);
@@ -376,7 +377,7 @@ class trabalhoController extends Controller
     $categorias=$this->servicecategoria->getAll();
     $orientador=$this->orientadorservice->getAll();
     $autores=$h->nomesAutoresPorTrabalho($id);
-    return view('trabalhos.mediado.alterar',['colecoes'=>$colecoes, 'categorias'=>$categorias,'t'=>$trabalho,'orientador'=>$orientador,'autores'=>$autores]);
+    return view('trabalhos.mediado.docente.alterar',['colecoes'=>$colecoes, 'categorias'=>$categorias,'t'=>$trabalho,'orientador'=>$orientador,'autores'=>$autores]);
 
    }
 
@@ -385,9 +386,10 @@ class trabalhoController extends Controller
    {
     
 
-    if($this->trabalhoservice->updatemediado($request))
+    if($this->trabalhoservice->updatemediadoDocente($request))
     {
-        $dados=$this->trabalhoservice->getAllMediado();
+        
+        $dados=$this->trabalhoservice->getAllMediadoDocente();
         return view('trabalhos.mediado.docente.listar',['trabalhos'=>$dados,'sms'=>'trabalho alterado com sucesso']);
     }
 

@@ -46,7 +46,7 @@
               </tr>
             </thead>
             <tbody>
-                @foreach($cat as $c)
+              @foreach($cat as $c)
               <tr>
                     <td class="py-1">{{$c->id}} </td>
               
@@ -63,5 +63,17 @@
     </div>
   </div>
 
+  <script>
+
+    function fecharDropdown(id) {
+        // Fecha o dropdown do menu
+        var dropdown = document.getElementById(id);
+        dropdown.classList.remove('show');
+    }
+
+
+
+
+</script>
 
 @endsection

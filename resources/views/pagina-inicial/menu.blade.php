@@ -40,8 +40,8 @@
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="{{ url("Home/percorrer-titulo") }}">Títulos</a></li>
                 <li><a class="dropdown-item" href="{{ url("#") }}">Autores</a></li>
-                <li><a class="dropdown-item" href="{{ url("#") }}">Orientadores</a></li>
-                <li><a class="dropdown-item" href="{{ url("#") }}">Assunto</a></li>
+                <li><a class="dropdown-item" href="{{ url("Home/percorrer-orientador") }}">Orientadores</a></li>
+                
                 <li><a class="dropdown-item" href="{{ url("#") }}">Data de publicação</a></li>
             </ul>
           </li>

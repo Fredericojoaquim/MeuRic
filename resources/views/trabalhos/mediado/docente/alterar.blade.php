@@ -59,7 +59,7 @@
             <h4 class="card-title text-center text-primary"> <strong>Arquivamento Mediado-Alterar</strong> </h4>
                 @if(isset($t))
 
-                <form id="regForm" class="forms-sample without-margin" action="{{url('trabalho/arquivamento-mediado/update')}}" method="POST" enctype="multipart/form-data" >
+                <form id="regForm" class="forms-sample without-margin" action="{{url('trabalho/arquivamento-mediado/docente/update')}}" method="POST" enctype="multipart/form-data" >
                     @csrf 
                     {{ method_field('PUT') }}
                     <!-- One "tab" for each step in the form: -->
@@ -78,6 +78,7 @@
 
                       <div class="form-group">
                         <input type="hidden" name="trabalho_id" value="{{$t->codigo}}">
+                        <input type="hidden" name="estado" value="{{$t->estado}}">
                         <input type="hidden" name="metadado_id" value="{{$t->metadado_id}}">
                         <label>Categoria</label>
                         <select class="js-example-basic-single w-100 form-control myinput" name="categoria">

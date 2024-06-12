@@ -1,6 +1,6 @@
 @extends('templates.template')
 @section('title', 'Utilizadores')
-<link rel="stylesheet" href="{{asset('assets/bootstrap/css/bootstrap.min.css')}}">
+
 
 
 @section('content')
@@ -21,7 +21,7 @@
         
        
         <div class="table-responsive">
-          <table class="table table-striped">
+          <table class="table table-striped" id="datatable">
             <thead>
               <tr>
                 <th>  #</th>
@@ -124,14 +124,14 @@
     </div>
   </div>
   <!-- EndModal -->
-<script src="{{asset('vendorS/jquery/jquery-3.3.1.min.js')}}"></script> 
-<script src="{{url('assets/bootstrap/js/bootstrap.bundle.js')}}"></script>
-<script>
-  function retornaid(id){
-               
-             $('#user_id').val(id);
-             $('#user_id_').val(id);
-         }
-</script>
+ 
+        
+  <script src="{{asset('vendorS/jquery/jquery-3.3.1.min.js')}}"></script> 
+  <script>
+   
+    var minhaTabela = document.getElementById('datatable');
+    var dataTable = new DataTable(minhaTabela);
+
+  </script>
 
 @endsection

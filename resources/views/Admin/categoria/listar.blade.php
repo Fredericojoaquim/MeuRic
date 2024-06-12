@@ -32,7 +32,7 @@
         @endif
 
         <div class="table-responsive">
-          <table class="table table-striped">
+          <table class="table table-striped" id="datatable">
             <thead>
               <tr>
                 <th>  #</th>
@@ -60,6 +60,12 @@
       </div>
     </div>
   </div>
+
+  <script>
+     
+            
+     
+  </script>
 
 
 @endsection

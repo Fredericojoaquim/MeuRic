@@ -32,6 +32,13 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 
 
+  <style>
+    .custom-chart-card {
+      height: 300px; /* Defina a altura desejada aqui */
+    }
+  </style>
+
+
   
 </head>
 <body>
@@ -65,6 +72,7 @@
           
           </li>
         </ul>
+
         <ul class="navbar-nav ms-auto">
           <li class="nav-item d-none d-lg-block">
             <div id="datepicker-popup" class="input-group date datepicker navbar-date-picker">
@@ -167,7 +175,7 @@
                 <p class="mb-1 mt-3 font-weight-semibold">{{Auth::user()->name}}</p>
                 <p class="fw-light text-muted mb-0">{{Auth::user()->email}}</p>
               </div>
-              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile <span class="badge badge-pill badge-danger">1</span></a>
+              <a class="dropdown-item" href="{{url('user/perfil')}}"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile <span class="badge badge-pill badge-danger">1</span></a>
               <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-message-text-outline text-primary me-2"></i> Messages</a>
               <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-calendar-check-outline text-primary me-2"></i> Activity</a>
               <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i> FAQ</a>
@@ -188,6 +196,8 @@
     </nav>
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
+
+    
       <!-- partial:partials/_settings-panel.html -->
       <div class="theme-setting-wrapper">
         <div id="settings-trigger"><i class="ti-settings"></i></div>
@@ -535,7 +545,7 @@
                   <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
                     <div class="tab-content tab-content-basic">
                       <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
-                        @can('admin')
+                        @can('Bibliotecário')
                           
                        
                         <div class="row">
@@ -579,6 +589,68 @@
                         @endcan
                   
                     @yield('content')
+
+                    <div class="row flex-grow">
+                      <!-- Grafico de PISA Utilizadores -->
+                      <div class="col-lg-4">
+                        <div class="card card-rounded custom-chart-card">
+                          <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                              <h4 class="card-title card-title-dash">Tipos de utilizadores</h4>
+                            </div>
+                            <canvas class="my-auto" id="doughnutChart" height="200"></canvas>
+                            <div id="doughnut-chart-legend" class="mt-5 text-center"></div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <!-- Grafico de Barra -->
+                      <div class="col-lg-4">
+                        <div class="card card-rounded custom-chart-card">
+                          <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                              <h4 class="card-title card-title-dash">Leave Report</h4>
+                              <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle toggle-dark btn-lg mb-0 me-0" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Month Wise </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+                                  <h6 class="dropdown-header">week Wise</h6>
+                                  <a class="dropdown-item" href="#">Year Wise</a>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="mt-3">
+                              <canvas id="leaveReport"></canvas>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    
+                      <!-- Terceiro Gráfico Aqui -->
+                     
+                      <!-- Adicione o terceiro gráfico dentro de outro col-lg-4 aqui -->
+                    </div>
+
+                    <div class="row">
+
+                      
+                        <div class="card-body">
+                          
+                          <div class="d-sm-flex align-items-center mt-1 justify-content-between">
+                            <h4 class="">Market Overview</h4>
+                            <div class="d-sm-flex align-items-center mt-4 justify-content-between"><h2 class="me-2 fw-bold">$36,2531.00</h2><h4 class="me-2">USD</h4><h4 class="text-success">(+1.37%)</h4></div>
+                            <div class="me-3"><div id="marketing-overview-legend"></div></div>
+                          </div>
+                          <div class="chartjs-bar-wrapper mt-3">
+                            <canvas id="marketingOverview"></canvas>
+                          </div>
+                        </div>
+                     
+                </div>
+
+                      
+                    </div>
+                    
+                      
 
                   </div>
                 </div>

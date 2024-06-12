@@ -24,12 +24,14 @@ interface Itrabalho
     public function saveMediado(Request $request);
     public function getAllAuto();
     public function getAllMediado();
+    public function updatemediadoDocente(Request $request);
 
     public function updateAuto(Request $request);
     public function updatemediado(Request $request);
     public function updatemediadDocente(Request $request);
     public function saveMediadoDocente(Request $request);
     public function getAllMediadoDocente();
+    public function getByOrientador($orientador_id);
 
     //estatisticas
     public function countTcc();

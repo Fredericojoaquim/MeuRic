@@ -57,7 +57,13 @@
                     <td> {{$c->data_criacao}}  </td>
                     <td> {{$c->estado}}  </td>
                     <td class="d-flex justify-content-center"> 
-                      <a href="{{url("trabalho/arquivamento-mediado/edit/$c->codigo")}}"  class="btn btn-primary me-2 font-button">Alterar</a>
+                      @if($c->estado=='aprovado')
+                      
+                        <button class="btn btn-primary me-2 font-button" disabled>Alterar</button>
+                        @else
+                        <a href="{{url("trabalho/arquivamento-mediado/edit/docente/$c->codigo")}}"  class="btn btn-primary me-2 font-button">Alterar</a>
+                      @endif
+                     
                       <a href="{{url("trabalho/arquivamento-mediado/docente/detalhes/$c->codigo")}}"  class="btn btn-info me-2 font-button">Detalhes</a>
                     </td>
               </tr>

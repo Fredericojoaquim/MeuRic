@@ -86,6 +86,10 @@ Route::PUT('user/desbloquear', [UserController::class,'desbloquear'])->middlewar
 Route::get('user/aterar/{id}', [UserController::class,'edit'])->middleware('admin');
 Route::PUT('user/alterar', [UserController::class,'update'])->middleware('admin');
 
+
+Route::get('user/perfil', [UserController::class,'perfil'])->middleware('auth');
+
+
 //trabalhos-autoarquivamento-Estudantes
 Route::get('trabalho/autoarquivamento/create', [TrabalhoController::class,'autoArquivamentoCreate'])->middleware('estudante');
 Route::post('trabalho/autoarquivamento/registar', [TrabalhoController::class,'autoArquivamentoSave'])->middleware('estudante');
@@ -115,11 +119,13 @@ Route::get('trabalho/mediado/docente/create', [TrabalhoController::class,'mediad
 Route::post('trabalho/arquivamento-mediado/docente/registar', [TrabalhoController::class,'mediadoSaveDocente'])->middleware('docente');
 Route::get('trabalho/arquivamento-mediado/docente/listar', [TrabalhoController::class,'arquivamentoMediadoListarDocente'])->middleware('docente');
 Route::get('trabalho/arquivamento-mediado/edit/docente/{id}', [TrabalhoController::class,'mediado_edit_docente'])->middleware('docente');
-Route::put('trabalho/arquivamento-mediado/update', [TrabalhoController::class,'updatemediado'])->middleware('docente');
+Route::put('trabalho/arquivamento-mediado/docente/update', [TrabalhoController::class,'updatemediadoDocente'])->middleware('docente');
 Route::get('trabalho/arquivamento-mediado/docente/detalhes/{id}', [TrabalhoController::class,'show'])->middleware('docente');
 //home
 Route::get('Home/sobre', [HomeController::class,'sobre']);
 Route::get('Home/percorrer-titulo', [HomeController::class,'percorerrPorTitulo']);
+Route::get('Home/percorrer-orientador', [HomeController::class,'percorerrPorOrientador']);
+Route::get('Home/percorrer-orientador/{id}', [HomeController::class,'getByOrientador']);
 Route::get('Home/percorerr-detalhes/{id}', [HomeController::class,'detalhes']);
 Route::get('Home/percorrer-colecao', [HomeController::class,'percorerrPorColecao']);
 Route::get('Home/percorerr-colecao/{id}', [HomeController::class,'trabalhoPorColecao']);

@@ -1,20 +1,18 @@
 @extends('layouts.guest')
 
-@section('title', 'RIC-Orientador')
-@section('location', 'Orientador')
-@section('styles')
-    <style>
-        .label.label-default {
-            background-color: #4986fc;
-            color: white;
-            padding: 2px 6px;
-            margin-right: 1px;
-            border-radius: 5px;
-        }
-    </style>
-@endsection
+@section('title', 'RIC-Precorrer por Assunto')
+@section('location', 'Precorrer por Assunto')
 
 @section('content')
+
+<style>
+    .centralizar {
+    display: flex!important;
+    justify-content: center!important;
+    align-items: center!important;
+    
+    }
+</style>
     <!-- Texto no topo com a visualização da rota -->
     <section class="hero-wrap hero-wrap-2"
         style="background-image: url('{{ url('template-pagina-inicial/images/biblioteca-agostinho.jpg') }}');background-attachment: fixed; background-position: 50% 50%; height: 300px;">
@@ -23,20 +21,20 @@
             <div class="row no-gutters slider-text align-items-end justify-content-center" style="height: 300px;">
                 <div class="col-md-9 ftco-animate pb-5 text-center">
                     <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Pagina Inicial <i
-                                    class="fa fa-chevron-right"></i></a></span> <span>Precorrer por Orientador <i
+                                    class="fa fa-chevron-right"></i></a></span> <span>Precorrer por <i
                                 class="fa fa-chevron-right"></i></span></p>
-                    <h1 class="mb-0 bread">Precorrer por Orientador</h1>
+                    </span> <span>Assunto <i class="fa fa-chevron-right"></i></span></p>
+                    <h1 class="mb-0 bread">Percorrer por Orientador</h1>
                 </div>
             </div>
         </div>
     </section>
     <!-- Fim texto no topo com a visualização da rota -->
 
-
     <!-- Container ou seja corpo da página de pesquisas -->
     <section class="ftco-section bg-light">
         <div class="container">
-            <h1>Precorrer por Orientador</h1>
+            <h1>Percorrer por Orientador</h1>
 
             <!-- Card-Pesquisa --->
             <div class="row justify-content-center pt-2">
@@ -82,6 +80,19 @@
 
                                         <div class="row mt-4">
                                             <div class="col-12 d-flex flex-row justify-content-center">
+                                                <span>Ordenar por:</span>
+                                                <div class="form-group">
+                                                    <div class="col-sm-4">
+                                                        <select class="form-control select"
+                                                            style="min-width: 200px; border-radius: 5px; background-color:#e4e4e4;"
+                                                            id="gender1">
+                                                            <option>Título</option>
+                                                            <option>Data de Publicação</option>
+                                                            <option>Autor</option>
+                                                            <option>Tipo de Acesso</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
                                                 <span>Em ordem:</span>
                                                 <div class="form-group">
                                                     <div class="col-sm-4">
@@ -116,35 +127,76 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-12 px-2 pt-4">
                     <div class="card card-primary">
                         <div class="card-header py-1 text-sm" style="font-size: .7em; text-align:center;">
-                            Mostrar 1-20 de um total de 70 resultados
+                           Resultado encontrados...
                         </div>
                         <div class="card-body p-0">
-                            <ul class="list-group">
-                                @if (isset($orientadores) && $orientadores->count() > 0)
-                                    @foreach ($orientadores as $orientador)
-                                        <li class="list-group-item">
-                                            <a href="#">
-                                                {{ $orientador->apelido }}, {{ $orientador->nome }}
-                                            </a>
-                                            <span
-                                                class="badge badge-secondary float-right my-auto">{{ $orientador->metadados->count() }}</span>
-                                        </li>
-                                    @endforeach
-                                @else
-                                    <li class="list-group-item">
-                                        <p class="text-center">Nenhuma informação encontrada</p>
-                                    </li>
-                                @endif
-                            </ul>
+                            <table align="center" class="table p-0 m-0"
+                                summary="Esta tabela contém todos os trabalhos organizados por título">
+                                <tbody>
+                                    <tr>
+                                  
+                                        <th id="t2" class="oddRowOddCol"><strong>Orientador (es)</strong></th>
+                                        <th id="t3" class="oddRowEvenCol">qtd </th>
+                                        
+                                        <th id="t5" class="oddRowEvenCol">Acesso</th>
+                                    </tr>
+
+                                    @if(isset($trabalhos) && $trabalhos->count()>0)
+                                        @foreach($trabalhos as $t)
+                                            <tr>
+                                                <td headers="t1" nowrap="nowrap"  class="text-left">
+                                                <a href="{{url("Home/percorrer-orientador/$t->codigo")}}">{{$t->orientador}}</a>
+                                                </td>
+                                                <td headers="t2" class="text-left">
+                                                    {{$t->qtd}}
+                                                </td>
+                                               
+                                                
+                                                <td headers="t5" class="text-left">
+                                                    Acesso aberto 
+                                                </td>
+                                            </tr>
+                                            
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td colspan="5" class="text-center">Nenhuma informação encontrada</td>
+                                        </tr>
+                                        
+                                    @endif
+                                 
+                                        
+                                     
+                                        
+                              
+                                </tbody>
+                            </table>
                         </div>
+                        
                     </div>
                 </div>
             </div>
         </div>
+
+        
     </section>
+
+    <div class="container">
+        <div class="row">
+            <div class="centralizar">
+                 <!-- Links de Paginação -->
+                 {{ $trabalhos->links() }}
+            </div>
+        </div>
+    </div>
+
+    
+
+    
 
 @endsection
 
